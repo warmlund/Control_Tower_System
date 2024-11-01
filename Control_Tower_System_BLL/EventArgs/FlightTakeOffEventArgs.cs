@@ -7,13 +7,11 @@ namespace Control_Tower_System_BLL
     /// </summary>
     public class FlightTakeOffEventArgs : FlightEventArgs
     {
-        public DateTime TakeOffTime { get; }
         public string Message { get; }
 
-        public FlightTakeOffEventArgs(Flight flight, DateTime time) : base(flight)
+        public FlightTakeOffEventArgs(Flight flight) : base(flight)
         {
-            TakeOffTime = time;
-            Message = $"Flight {flight.Airline} ({flight.AirlineId}) has departed to {flight.Destination} at {TakeOffTime}";
+            Message = $"Flight {flight.Airline} ({flight.AirlineId}) has departed to {flight.Destination} at {flight.LocalTime}";
         }
     }
 }

@@ -5,44 +5,61 @@ namespace Control_Tower_System_BLL
     public class ControlTower : IControlTower
     {
         private FlightStorage _flightStorage;
+        private FlightManager _flightManager;
+
+        //events for notifying the PL layer
+        public event EventHandler<FlightTakeOffEventArgs> FlightTakingOff;
+        public event EventHandler<FlightLandedEventArgs> FlightLanding;
+        public event EventHandler<FlightHeightEventArgs> FlightAltitudeChanged;
 
         public ControlTower()
         {
             _flightStorage = new FlightStorage();
+            _flightManager = new FlightManager();
+
+            _flightManager.TakingOff += OnFlightTakingOff;
+            _flightManager.Landing += OnFlightLanding;
+            _flightManager.ChangingAltitude += OnChangingAltitude;
+        }
+
+        public void AddFlight()
+        {
+            _flightStorage.Add(_flightManager.CurrentFlight);
+        }
+
+        public void OrderTakeOff()
+        {
+            _flightManager.TakeOff();
+        }
+
+        public void ChangeAltitude(double altitude)
+        {
+
+        }
+        public void ChangeCurrentFlight(int index)
+        {
+            Flight selectedFlight= _flightStorage.Get(index);
+            _flightManager.CurrentFlight=selectedFlight;
         }
 
         public void CreateFlight(string id, string airline, string destination, double duration, double flightHeight, bool inFlight, TimeOnly time)
         {
-            Flight flight = new Flight
-            {
-                AirlineId = id,
-                Airline = airline,
-                Destination = destination,
-                Duration = duration,
-                FlightHeight = flightHeight,
-                InFlight = inFlight,
-                LocalTime = time
-            };
+           _flightManager.CreateFlight(id,airline, destination, duration, flightHeight, inFlight, time);
         }
 
-        public void AddFlight(Flight flight)
+        public void OnFlightTakingOff(object sender, FlightTakeOffEventArgs e)
         {
-            _flightStorage.Add(flight);
+            FlightTakingOff?.Invoke(this, e);
         }
 
-        public void TakeOff(Flight flight)
+        public void OnFlightLanding(object sender, FlightLandedEventArgs e)
         {
-
+            FlightLanding?.Invoke(this, e);
         }
 
-        public void Land(Flight flight)
+        public void OnChangingAltitude(object sender, FlightHeightEventArgs e)
         {
-
-        }
-
-        public void ChangeAltitude(Flight flight)
-        {
-
+            FlightAltitudeChanged?.Invoke(this, e);
         }
     }
 }
