@@ -36,7 +36,5 @@
             else
                 return default;
         }
-
-        public abstract string[] ToStringArray();
     }
 }

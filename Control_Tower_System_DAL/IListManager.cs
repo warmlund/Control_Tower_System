@@ -32,12 +32,6 @@
         T Get(int index);
 
         /// <summary>
-        /// Returns all items in the list to an array of strings
-        /// </summary>
-        /// <returns></returns>
-        string[] ToStringArray();
-
-        /// <summary>
         /// returns the count of the list
         /// </summary>
         /// <returns></returns>

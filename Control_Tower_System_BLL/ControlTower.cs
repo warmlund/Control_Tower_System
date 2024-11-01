@@ -45,9 +45,13 @@ namespace Control_Tower_System_BLL
             _flightManager.CurrentFlight = selectedFlight;
         }
 
-        public void CreateFlight(string id, string airline, string destination, double duration, double flightHeight, bool inFlight, TimeOnly time)
+        public List<Flight> GetAllFlights()
         {
-            _flightManager.CreateFlight(id, airline, destination, duration, flightHeight, inFlight, time);
+            return _flightStorage.GetAllFlights();
+        }
+        public void CreateFlight(string id, string airline, string destination, double duration)
+        {
+            _flightManager.CreateFlight(id, airline, destination, duration);
         }
 
         public void OnFlightTakingOff(object sender, FlightTakeOffEventArgs e)
