@@ -33,7 +33,7 @@ namespace Control_Tower_System_BLL
 
         public void TakeOff() => OnTakeOff();
         public void Land() => OnLanding();
-        public void ChangeAltitude() => OnAltitudeChange();
+        public void ChangeAltitude(double altitude) => OnAltitudeChange(altitude);
 
         private void OnTakeOff()
         {
@@ -51,8 +51,9 @@ namespace Control_Tower_System_BLL
             Landing?.Invoke(CurrentFlight, new FlightLandedEventArgs(CurrentFlight));
         }
 
-        private void OnAltitudeChange()
+        private void OnAltitudeChange(double altitude)
         {
+            CurrentFlight.FlightAltitude = altitude;
             ChangingAltitude?.Invoke(CurrentFlight, new FlightHeightEventArgs(CurrentFlight));
         }
 

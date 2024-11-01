@@ -12,6 +12,8 @@ namespace Control_Tower_System_BLL
         public event EventHandler<FlightLandedEventArgs> FlightLanding;
         public event EventHandler<FlightHeightEventArgs> FlightAltitudeChanged;
 
+        public delegate void ChangeAltitudeDelegate(double altitudeValue);
+
         public ControlTower()
         {
             _flightStorage = new FlightStorage();
@@ -32,19 +34,20 @@ namespace Control_Tower_System_BLL
             _flightManager.TakeOff();
         }
 
-        public void ChangeAltitude(double altitude)
+        public void OrderAltitudeChange(double altitude)
         {
-
+            ChangeAltitudeDelegate changeAltitude = _flightManager.ChangeAltitude;
         }
+
         public void ChangeCurrentFlight(int index)
         {
-            Flight selectedFlight= _flightStorage.Get(index);
-            _flightManager.CurrentFlight=selectedFlight;
+            Flight selectedFlight = _flightStorage.Get(index);
+            _flightManager.CurrentFlight = selectedFlight;
         }
 
         public void CreateFlight(string id, string airline, string destination, double duration, double flightHeight, bool inFlight, TimeOnly time)
         {
-           _flightManager.CreateFlight(id,airline, destination, duration, flightHeight, inFlight, time);
+            _flightManager.CreateFlight(id, airline, destination, duration, flightHeight, inFlight, time);
         }
 
         public void OnFlightTakingOff(object sender, FlightTakeOffEventArgs e)
