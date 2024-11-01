@@ -1,15 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Control_Tower_System_DTO;
 
 namespace Control_Tower_System_BLL
 {
-    internal class FlightLandedEventArgs : EventArgs
+    /// <summary>
+    /// Event args for flight landing
+    /// </summary>
+    public class FlightLandedEventArgs : FlightEventArgs
     {
-        public string Name { get; set; }
-        public string Message { get; set; }
+        public DateTime LandTime { get; }
+
+        public FlightLandedEventArgs(Flight flight, DateTime time) : base(flight)
+        {
+            LandTime = time;
+        }
 
     }
 }

@@ -1,8 +1,17 @@
-﻿namespace Control_Tower_System_BLL
+﻿using Control_Tower_System_DTO;
+
+namespace Control_Tower_System_BLL
 {
-    public class FlightTakeOffEventArgs : EventArgs
+    /// <summary>
+    /// Event args for flight takeoff
+    /// </summary>
+    public class FlightTakeOffEventArgs : FlightEventArgs
     {
-        public string Name { get; set; }
-        public string Message { get; set; }
+        public DateTime TakeOffTime { get; }
+
+        public FlightTakeOffEventArgs(Flight flight, DateTime time) : base(flight)
+        {
+            TakeOffTime = time;
+        }
     }
 }
