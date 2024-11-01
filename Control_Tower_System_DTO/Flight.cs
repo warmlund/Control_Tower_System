@@ -2,9 +2,12 @@
 {
     public class Flight
     {
-        string AirlineId { get; set; }
-        string Airline { get; set; }
-        string Destination { get; set; }
-        double Duration { get; set; }
+        public string AirlineId { get; set; }
+        public string Airline { get; set; }
+        public string Destination { get; set; }
+        public double Duration { get; set; }
+        public double FlightHeight { get; set; }
+        public bool InFlight { get; set; }
+        public TimeOnly LocalTime { get; set; }
     }
 }
