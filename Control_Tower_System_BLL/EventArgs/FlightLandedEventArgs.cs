@@ -8,10 +8,12 @@ namespace Control_Tower_System_BLL
     public class FlightLandedEventArgs : FlightEventArgs
     {
         public DateTime LandTime { get; }
+        public string Message  { get; }
 
         public FlightLandedEventArgs(Flight flight, DateTime time) : base(flight)
         {
             LandTime = time;
+            Message = $"Flight {flight.Airline} ({flight.AirlineId}) has landed in {flight.Destination} at {LandTime}";
         }
 
     }

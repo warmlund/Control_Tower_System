@@ -23,7 +23,6 @@ namespace Control_Tower_System_BLL
                 InFlight = inFlight,
                 LocalTime = time
             };
-
         }
 
         public void AddFlight(Flight flight)
