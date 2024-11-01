@@ -5,11 +5,11 @@ VisualStudioVersion = 17.11.35303.130
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Control_Tower_System_PL", "Control_Tower_System_PL\Control_Tower_System_PL.csproj", "{34D9B2B0-9EFB-4D8D-A2BA-DBDC129E160D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Control_Tower_System_BLL", "Control_Tower_System_BLL\Control_Tower_System_BLL.csproj", "{3DE66EF4-2836-4030-A04F-D53875DAADC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Control_Tower_System_BLL", "Control_Tower_System_BLL\Control_Tower_System_BLL.csproj", "{3DE66EF4-2836-4030-A04F-D53875DAADC4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Control_Tower_System_DTO", "Control_Tower_System_DTO\Control_Tower_System_DTO.csproj", "{B4605281-F904-40E0-A0A9-864756E1D36C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Control_Tower_System_DTO", "Control_Tower_System_DTO\Control_Tower_System_DTO.csproj", "{B4605281-F904-40E0-A0A9-864756E1D36C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Control_Tower_System_DAL", "Control_Tower_System_DAL\Control_Tower_System_DAL.csproj", "{EBE1ADDD-F0CC-41AD-BDD9-0886B6D245BC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Control_Tower_System_DAL", "Control_Tower_System_DAL\Control_Tower_System_DAL.csproj", "{EBE1ADDD-F0CC-41AD-BDD9-0886B6D245BC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

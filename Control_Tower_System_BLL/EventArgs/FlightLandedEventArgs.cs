@@ -7,11 +7,11 @@ namespace Control_Tower_System_BLL
     /// </summary>
     public class FlightLandedEventArgs : FlightEventArgs
     {
-        public DateTime LandTime { get; }
+        public string Message  { get; }
 
-        public FlightLandedEventArgs(Flight flight, DateTime time) : base(flight)
+        public FlightLandedEventArgs(Flight flight) : base(flight)
         {
-            LandTime = time;
+            Message = $"Flight {flight.Airline} ({flight.AirlineId}) has landed in {flight.Destination} at {flight.LocalTime}";
         }
 
     }
