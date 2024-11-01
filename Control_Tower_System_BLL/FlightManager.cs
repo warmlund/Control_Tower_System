@@ -17,7 +17,7 @@ namespace Control_Tower_System_BLL
 
         public Flight CurrentFlight {  get; set; }
 
-        public void CreateFlight(string id, string airline, string destination, double duration, double flightHeight, bool inFlight, TimeOnly time)
+        public void CreateFlight(string id, string airline, string destination, double duration)
         {
            CurrentFlight= new Flight
             {
@@ -25,9 +25,9 @@ namespace Control_Tower_System_BLL
                 Airline = airline,
                 Destination = destination,
                 Duration = duration,
-                FlightAltitude = flightHeight,
-                InFlight = inFlight,
-                LocalTime = time
+                FlightAltitude = GenerateRandomHeight(),
+                InFlight = false,
+                LocalTime = TimeOnly.FromDateTime(DateTime.Now)
             };
         }
 
@@ -46,7 +46,7 @@ namespace Control_Tower_System_BLL
 
         private void OnLanding()
         {
-            SetupTimer();
+            StopTimer();
             CurrentFlight.InFlight= false;
             Landing?.Invoke(CurrentFlight, new FlightLandedEventArgs(CurrentFlight));
         }
@@ -57,7 +57,7 @@ namespace Control_Tower_System_BLL
             ChangingAltitude?.Invoke(CurrentFlight, new FlightHeightEventArgs(CurrentFlight));
         }
 
-        public void SetupTimer()
+        private void SetupTimer()
         {
             _dispatcher= new DispatcherTimer();
             _dispatcher.Tick += new EventHandler(OnTimerTicking);
@@ -78,6 +78,11 @@ namespace Control_Tower_System_BLL
 
             if(timeLeft >= CurrentFlight.Duration)
                 OnLanding();
+        }
+        private double GenerateRandomHeight()
+        {
+            var random = new Random();
+            return random.Next(0, 10000);
         }
     }
 }

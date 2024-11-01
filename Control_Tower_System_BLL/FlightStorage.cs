@@ -1,24 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Control_Tower_System_DAL;
+﻿using Control_Tower_System_DAL;
 using Control_Tower_System_DTO;
 
 namespace Control_Tower_System_BLL
 {
     public class FlightStorage : ListManager<Flight>
     {
-        public override string[] ToStringArray()
+        public List<Flight> GetAllFlights()
         {
-            var flightArray = new string[_list.Count];
-
-            for (int i = 0; i < _list.Count; i++)
+            var list = new List<Flight>();
+            foreach (var flight in _list)
             {
-                flightArray[i] = _list[i].ToString();
+                list.Add(flight);
             }
-            return flightArray;
+            return list;
         }
     }
 }
