@@ -7,7 +7,7 @@
     <SolidColorBrush x:Key="TextColor">#1A1A1A</SolidColorBrush>
     <SolidColorBrush x:Key="DisabledTextColor">#9F9F9F</SolidColorBrush>
     <SolidColorBrush x:Key="MainColor">#D03F0A</SolidColorBrush>
-    <SolidColorBrush x:Key="SecondaryColor">#F3F3F3</SolidColorBrush>
+    <SolidColorBrush x:Key="SecondaryColor">#F9F9F9</SolidColorBrush>
 
     <!--#endregion-->
 
@@ -99,13 +99,11 @@
 
     <!-- ListView Item Style -->
     <Style x:Key="ListViewItemStyle" TargetType="{x:Type ListViewItem}">
-        <Setter Property="MinWidth" Value="100"/>
-        <Setter Property="Height" Value="50"/>
+        <Setter Property="Height" Value="20"/>
         <Setter Property="Background" Value="{DynamicResource SecondaryColor}"/>
         <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
-        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Margin" Value="10"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="IsHitTestVisible" Value="False"/>
         <Style.Triggers>

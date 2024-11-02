@@ -74,7 +74,7 @@
         <!--#endregion-->
 
         <ListView x:Name="FlightInformation" Grid.Row="0" Grid.Column="1" ItemsSource="{Binding FlightList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                  Style="{StaticResource ListViewStyle}" ItemContainerStyle="{StaticResource ListViewItemStyle}">
+                  Style="{StaticResource ListViewStyle}" ItemContainerStyle="{StaticResource ListViewItemStyle}" d:ItemsSource="{d:SampleData ItemCount=5}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Airliner" Width="120" DisplayMemberBinding="{Binding Name}" HeaderContainerStyle="{StaticResource ListViewColumnHeaderStyle}"/>
@@ -86,7 +86,7 @@
         </ListView>
 
         <ListView x:Name="FlightStatus" Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding StatusList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-           Style="{StaticResource ListViewStyle}" ItemContainerStyle="{StaticResource ListViewItemStyle}">
+           Style="{StaticResource ListViewStyle}" ItemContainerStyle="{StaticResource ListViewItemStyle}" d:ItemsSource="{d:SampleData ItemCount=5}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Flight Status" Width="800" HeaderContainerStyle="{StaticResource ListViewColumnHeaderStyle}"/>
