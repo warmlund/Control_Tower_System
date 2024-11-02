@@ -6,7 +6,8 @@
     <SolidColorBrush x:Key="MouseOverColor">#EAEAEA</SolidColorBrush>
     <SolidColorBrush x:Key="TextColor">#1A1A1A</SolidColorBrush>
     <SolidColorBrush x:Key="DisabledTextColor">#9F9F9F</SolidColorBrush>
-    <SolidColorBrush x:Key="MainColor">#D03F0A</SolidColorBrush>
+    <SolidColorBrush x:Key="MainColor">#A349A4</SolidColorBrush>
+    <SolidColorBrush x:Key="MainSecondaryColor"></SolidColorBrush>
     <SolidColorBrush x:Key="SecondaryColor">#F9F9F9</SolidColorBrush>
 
     <!--#endregion-->
@@ -37,14 +38,11 @@
                             BorderBrush="{TemplateBinding Background}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         CornerRadius="2">
-                        <Border.Effect>
-                            <DropShadowEffect Color="Black" Opacity="0.2" BlurRadius="0" ShadowDepth="2"/>
-                        </Border.Effect>
                         <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="ButtonBorder" Property="Background" Value="Transparent"/>
+                            <Setter TargetName="ButtonBorder" Property="Background" Value="{DynamicResource SecondaryColor}"/>
                             <Setter Property="BorderThickness" Value="2"/>
                             <Setter Property="Foreground" Value="{DynamicResource MainColor}"/>
                         </Trigger>
@@ -75,9 +73,6 @@
                 <ControlTemplate TargetType="{x:Type TextBox}">
                     <Border x:Name="TextBoxBorder" Background="{DynamicResource SecondaryColor}" BorderBrush="{DynamicResource TextColor}" BorderThickness="1" CornerRadius="2">
                         <ScrollViewer x:Name="PART_ContentHost"/>
-                        <Border.Effect>
-                            <DropShadowEffect Color="Black" Opacity="0.3" BlurRadius="0" ShadowDepth="1"/>
-                        </Border.Effect>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -105,13 +100,13 @@
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="IsHitTestVisible" Value="False"/>
+        <Setter Property="IsHitTestVisible" Value="True"/>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="{DynamicResource MouseOverColor}"/>
             </Trigger>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="{DynamicResource MouseOverColor}"/>
+                <Setter Property="Background" Value="#ffe1d6"/>
                 <Setter Property="BorderBrush" Value="Transparent"/>
                 <Setter Property="Foreground" Value="{DynamicResource TextColor}"/>
             </Trigger>

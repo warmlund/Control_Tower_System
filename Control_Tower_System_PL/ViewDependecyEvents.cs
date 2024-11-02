@@ -26,10 +26,8 @@ namespace Control_Tower_System_PL
                 {
                     if (listView.DataContext is ViewModel vm)
                     {
-                        if (listView.Name == "FlightInformation")
-                        {
-                            vm.CurrentSelectedFlight = (Control_Tower_System_DTO.Flight)listView.SelectedItem;
-                        }
+                        vm.CurrentSelectedFlightIndex = listView.SelectedIndex;
+                        vm.TakeOff.RaiseCanExecuteChanged();
                     }
                 };
             }

@@ -10,7 +10,7 @@ namespace Control_Tower_System_PL
     {
         public MainWindow()
         {
-            DataContext = new ViewModel(new ControlTower());
+            DataContext = new ViewModel(new ControlTower(), new FlightManager());
             InitializeComponent();
         }
     }

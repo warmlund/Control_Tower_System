@@ -30,9 +30,9 @@
 
         <!--#region Input And menu controls -->
         <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0">
-            <Grid Margin="10">
+            <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="120"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -79,8 +79,8 @@
                   local:ViewDependecyEvents.SelectedItemsListViewEvents="True">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Airliner" Width="120" DisplayMemberBinding="{Binding Name}" HeaderContainerStyle="{StaticResource ListViewColumnHeaderStyle}"/>
-                    <GridViewColumn Header="Id" Width="50" DisplayMemberBinding="{Binding Id}" HeaderContainerStyle="{StaticResource ListViewColumnHeaderStyle}"/>
+                    <GridViewColumn Header="Airliner" Width="120" DisplayMemberBinding="{Binding Airline}" HeaderContainerStyle="{StaticResource ListViewColumnHeaderStyle}"/>
+                    <GridViewColumn Header="Id" Width="50" DisplayMemberBinding="{Binding AirlineId}" HeaderContainerStyle="{StaticResource ListViewColumnHeaderStyle}"/>
                     <GridViewColumn Header="Destination" Width="150" DisplayMemberBinding="{Binding Destination}" HeaderContainerStyle="{StaticResource ListViewColumnHeaderStyle}"/>
                     <GridViewColumn Header="Duration" Width="180" DisplayMemberBinding="{Binding Duration}" HeaderContainerStyle="{StaticResource ListViewColumnHeaderStyle}"/>
                 </GridView>
@@ -88,7 +88,7 @@
         </ListView>
 
         <ListView x:Name="FlightStatus" Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding StatusList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-           Style="{StaticResource ListViewStyle}" ItemContainerStyle="{StaticResource ListViewItemStyle}" d:ItemsSource="{d:SampleData ItemCount=5}">
+           Style="{StaticResource ListViewStyle}" SelectionMode="Single" ItemContainerStyle="{StaticResource ListViewItemStyle}" d:ItemsSource="{d:SampleData ItemCount=5}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Flight Status" Width="800" HeaderContainerStyle="{StaticResource ListViewColumnHeaderStyle}"/>
