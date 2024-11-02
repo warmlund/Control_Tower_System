@@ -2,69 +2,67 @@
 
 namespace Control_Tower_System_BLL
 {
-    public class ControlTower : IControlTower
+    public class ControlTower
     {
         private FlightStorage _flightStorage;
-        private FlightManager _flightManager;
 
-        //events for notifying the PL layer
+        public delegate void ChangeAltitudeDelegate(int flightId, double altitudeValue);
+
         public event EventHandler<FlightTakeOffEventArgs> FlightTakingOff;
         public event EventHandler<FlightLandedEventArgs> FlightLanding;
         public event EventHandler<FlightHeightEventArgs> FlightAltitudeChanged;
 
-        public delegate void ChangeAltitudeDelegate(double altitudeValue);
-
         public ControlTower()
         {
             _flightStorage = new FlightStorage();
-            _flightManager = new FlightManager();
-
-            _flightManager.TakingOff += OnFlightTakingOff;
-            _flightManager.Landing += OnFlightLanding;
-            _flightManager.ChangingAltitude += OnChangingAltitude;
         }
 
-        public void AddFlight()
+        public void OrderTakeOff(int flightId)
         {
-            _flightStorage.Add(_flightManager.CurrentFlight);
+            var flightManager = _flightStorage.Get(flightId);
+            flightManager?.OnTakeOff();
         }
 
-        public void OrderTakeOff()
+        public void OnNewAltitude(int flightId, double altitude)
         {
-            _flightManager.TakeOff();
-        }
-
-        public void OrderAltitudeChange(double altitude)
-        {
-            ChangeAltitudeDelegate changeAltitude = _flightManager.ChangeAltitude;
-        }
-
-        public void ChangeCurrentFlight(int index)
-        {
-            Flight selectedFlight = _flightStorage.Get(index);
-            _flightManager.CurrentFlight = selectedFlight;
+            Flight currentFlight = _flightStorage.GetFlight(flightId);
+            new ChangeAltitudeDelegate(ChangeAltitude)(flightId,altitude);
         }
 
         public List<Flight> GetAllFlights()
         {
             return _flightStorage.GetAllFlights();
         }
+
         public void CreateFlight(string id, string airline, string destination, double duration)
         {
-            _flightManager.CreateFlight(id, airline, destination, duration);
+            var flightManager = new FlightManager();
+            flightManager.CreateFlight(id, airline, destination, duration);
+
+            flightManager.TakingOff += OnFlightTakingOff;
+            flightManager.Landing += OnFlightLanding;
+            flightManager.AltitudeChanging += OnChangingAltitude;
+
+            _flightStorage.Add(flightManager); 
         }
 
-        public void OnFlightTakingOff(object sender, FlightTakeOffEventArgs e)
+        public void ChangeAltitude(int flightId, double altitude)
+        {
+            var flightManager = _flightStorage.Get(flightId);
+            flightManager?.OnAltitudeChange(altitude);
+        }
+
+        private void OnFlightTakingOff(object sender, FlightTakeOffEventArgs e)
         {
             FlightTakingOff?.Invoke(this, e);
         }
 
-        public void OnFlightLanding(object sender, FlightLandedEventArgs e)
+        private void OnFlightLanding(object sender, FlightLandedEventArgs e)
         {
             FlightLanding?.Invoke(this, e);
         }
 
-        public void OnChangingAltitude(object sender, FlightHeightEventArgs e)
+        private void OnChangingAltitude(object sender, FlightHeightEventArgs e)
         {
             FlightAltitudeChanged?.Invoke(this, e);
         }

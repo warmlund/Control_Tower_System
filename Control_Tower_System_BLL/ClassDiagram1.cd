@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Control_Tower_System_BLL.FlightEventArgs" Collapsed="true">
+    <Position X="3.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>EventArgs\FlightEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Control_Tower_System_BLL.FlightHeightEventArgs" Collapsed="true">
+    <Position X="3.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>EventArgs\FlightHeightEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Control_Tower_System_BLL.FlightLandedEventArgs" Collapsed="true">
+    <Position X="5.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>EventArgs\FlightLandedEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Control_Tower_System_BLL.FlightTakeOffEventArgs" Collapsed="true">
+    <Position X="1.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <FileName>EventArgs\FlightTakeOffEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Control_Tower_System_BLL.ControlTower" BaseTypeListCollapsed="true">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Delegate Name="Control_Tower_System_BLL.ControlTower.ChangeAltitudeDelegate">
+        <TypeIdentifier>
+          <NewMemberFileName>ControlTower.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>CAAQAAACAACAIAAAAACAAAAAggAAQAAAAAAAAAYBAAA=</HashCode>
+      <FileName>ControlTower.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Control_Tower_System_BLL.FlightManager">
+    <Position X="10" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AiAAQACCACAAAQAAgAAEAAAAgAAAAAAAAAQgAAAAAAA=</HashCode>
+      <FileName>FlightManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Control_Tower_System_BLL.FlightStorage" Collapsed="true">
+    <Position X="5.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAACAAAAAAAEAAAAAAAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>FlightStorage.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

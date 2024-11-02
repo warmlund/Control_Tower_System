@@ -7,15 +7,15 @@ namespace Control_Tower_System_BLL
     /// This class handles two delegate events for flight takeoff and landing
     /// "Blueprint" for Flight is in the flight class in the DTO layer
     /// </summary>
-    internal class FlightManager
+    public class FlightManager
     {
         private DispatcherTimer _dispatcher;
 
         public event EventHandler<FlightTakeOffEventArgs> TakingOff;
         public event EventHandler<FlightLandedEventArgs> Landing;
-        public event EventHandler<FlightHeightEventArgs> ChangingAltitude;
+        public event EventHandler<FlightHeightEventArgs> AltitudeChanging;
 
-        public Flight CurrentFlight {  get; set; }
+        public Flight CurrentFlight {  get; private set; }
 
         public void CreateFlight(string id, string airline, string destination, double duration)
         {
@@ -31,11 +31,7 @@ namespace Control_Tower_System_BLL
             };
         }
 
-        public void TakeOff() => OnTakeOff();
-        public void Land() => OnLanding();
-        public void ChangeAltitude(double altitude) => OnAltitudeChange(altitude);
-
-        private void OnTakeOff()
+        public void OnTakeOff()
         {
             SetupTimer();
             CurrentFlight.InFlight = true;
@@ -44,17 +40,19 @@ namespace Control_Tower_System_BLL
             TakingOff?.Invoke(CurrentFlight, new FlightTakeOffEventArgs(CurrentFlight));
         }
 
-        private void OnLanding()
+        public void OnLanding()
         {
-            StopTimer();
+            _dispatcher.Stop();
+            CurrentFlight.LocalTime = CurrentFlight.LocalTime.AddHours(CurrentFlight.Duration);
             CurrentFlight.InFlight= false;
             Landing?.Invoke(CurrentFlight, new FlightLandedEventArgs(CurrentFlight));
         }
 
-        private void OnAltitudeChange(double altitude)
+        public void OnAltitudeChange(double altitude)
         {
+            double oldAltitude = CurrentFlight.FlightAltitude;
             CurrentFlight.FlightAltitude = altitude;
-            ChangingAltitude?.Invoke(CurrentFlight, new FlightHeightEventArgs(CurrentFlight));
+            AltitudeChanging?.Invoke(CurrentFlight, new FlightHeightEventArgs(CurrentFlight, oldAltitude));
         }
 
         private void SetupTimer()
@@ -65,20 +63,17 @@ namespace Control_Tower_System_BLL
            _dispatcher.Start();
         }
 
-        public void StopTimer()
-        {
-            CurrentFlight.LocalTime= TimeOnly.FromDateTime(DateTime.Now);
-            _dispatcher.Stop();
-        }
-
         public void OnTimerTicking(object? sender, EventArgs e)
         {
             TimeOnly currentTime= TimeOnly.FromDateTime(DateTime.Now);
             double timeLeft=(currentTime-CurrentFlight.LocalTime).TotalSeconds;
 
             if(timeLeft >= CurrentFlight.Duration)
+            {
                 OnLanding();
+            }      
         }
+
         private double GenerateRandomHeight()
         {
             var random = new Random();
