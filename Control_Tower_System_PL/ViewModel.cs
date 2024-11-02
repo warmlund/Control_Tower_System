@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UtilitiesLib.Notifiers;
+﻿using Control_Tower_System_BLL;
+using Control_Tower_System_DTO;
+using System.Collections.ObjectModel;
 using UtilitiesLib.Commands;
 using UtilitiesLib.Converters;
-using System.Collections.ObjectModel;
-using Control_Tower_System_DTO;
-using Control_Tower_System_BLL;
-using System.Net.Sockets;
+using UtilitiesLib.Notifiers;
 
 namespace Control_Tower_System_PL
 {
@@ -85,7 +79,7 @@ namespace Control_Tower_System_PL
 
         private bool CanFlightTakeOff()
         {
-            if(_currentSelectedFlight != null && _flightList.Count > 0)
+            if (_currentSelectedFlight != null && _flightList.Count > 0)
                 return true;
             return false;
         }

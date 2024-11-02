@@ -1,15 +1,7 @@
-﻿using System.Text;
+﻿using Control_Tower_System_BLL;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace Control_Tower_System
+namespace Control_Tower_System_PL
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -18,6 +10,7 @@ namespace Control_Tower_System
     {
         public MainWindow()
         {
+            DataContext = new ViewModel(new ControlTower());
             InitializeComponent();
         }
     }

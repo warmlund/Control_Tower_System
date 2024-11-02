@@ -1,10 +1,11 @@
-﻿<Window x:Class="Control_Tower_System.MainWindow"
+﻿<Window x:Class="Control_Tower_System_PL.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Control_Tower_System" 
-        xmlns:control_tower_system_pl="clr-namespace:Control_Tower_System_PL" d:DataContext="{d:DesignInstance Type=control_tower_system_pl:ViewModel}"
+        xmlns:local="clr-namespace:Control_Tower_System_PL" 
+        xmlns:control_tower_system_pl="clr-namespace:Control_Tower_System_PL" 
+        d:DataContext="{d:DesignInstance Type=control_tower_system_pl:ViewModel}"
         mc:Ignorable="d"
         Title="Control Tower System" Height="600" Width="800" Background="#F9F9F9" WindowStyle="ThreeDBorderWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
 
@@ -74,7 +75,8 @@
         <!--#endregion-->
 
         <ListView x:Name="FlightInformation" Grid.Row="0" Grid.Column="1" ItemsSource="{Binding FlightList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                  Style="{StaticResource ListViewStyle}" ItemContainerStyle="{StaticResource ListViewItemStyle}" d:ItemsSource="{d:SampleData ItemCount=5}">
+                  Style="{StaticResource ListViewStyle}" ItemContainerStyle="{StaticResource ListViewItemStyle}" d:ItemsSource="{d:SampleData ItemCount=5}"
+                  local:ViewDependecyEvents.SelectedItemsListViewEvents="True">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Airliner" Width="120" DisplayMemberBinding="{Binding Name}" HeaderContainerStyle="{StaticResource ListViewColumnHeaderStyle}"/>
