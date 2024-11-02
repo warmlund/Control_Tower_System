@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Control_Tower_System_PL" 
         xmlns:control_tower_system_pl="clr-namespace:Control_Tower_System_PL" 
+        xmlns:validation="clr-namespace:UtilitiesLib.Validations;assembly=UtilitiesLib"
         d:DataContext="{d:DesignInstance Type=control_tower_system_pl:ViewModel}"
         mc:Ignorable="d"
         Title="Control Tower System" Height="600" Width="800" Background="#F9F9F9" WindowStyle="ThreeDBorderWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
@@ -15,6 +16,7 @@
                 <!-- Getting styles from the resource dictionary-->
                 <ResourceDictionary Source="Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <validation:DoubleValidationRule x:Key="DoubleValidationRule"/>
         </ResourceDictionary>
     </Window.Resources>
 
@@ -59,7 +61,15 @@
 
                 <!-- Flight Duration -->
                 <TextBlock Text="Flight Duration" Style="{StaticResource ButtonTextStyle}" Margin="10" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
-                <TextBox x:Name="DurationTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding ProposedDuration}" Margin="10" Grid.Row="3" Grid.Column="1"/>
+                <TextBox x:Name="DurationTextBox" Style="{StaticResource TextBoxDoubleStyle}" Margin="10" Grid.Row="3" Grid.Column="1">
+                    <TextBox.Text>
+                        <Binding Path="ProposedDuration" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <StaticResource ResourceKey="DoubleValidationRule"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
 
                 <!--Add Flight Button-->
                 <Button x:Name="AddFlightButton" Content="Add Flight" Style="{StaticResource MenuButtonStyle}" Command="{Binding AddFlight}" Margin="10" Grid.Column="1" Grid.Row="4"/>
@@ -69,7 +79,15 @@
 
                 <!--New Altitude Button-->
                 <Button x:Name="SetNewAltitudeButton" Content="Set New Altitude" Style="{StaticResource MenuButtonStyle}" Command="{Binding ChangeAltitude}" Margin="10" Grid.Column="0" Grid.Row="6"/>
-                <TextBox x:Name="AltitudeTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding ProposedAltitude}" Margin="10" Grid.Row="6" Grid.Column="1"/>
+                <TextBox x:Name="AltitudeTextBox" Style="{StaticResource TextBoxDoubleStyle}" Margin="10" Grid.Row="6" Grid.Column="1">
+                    <TextBox.Text>
+                        <Binding Path="ProposedDuration" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <StaticResource ResourceKey="DoubleValidationRule"/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
             </Grid>
         </StackPanel>
         <!--#endregion-->
@@ -79,10 +97,10 @@
                   local:ViewDependecyEvents.SelectedItemsListViewEvents="True">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Airliner" Width="120" DisplayMemberBinding="{Binding Airline}" HeaderContainerStyle="{StaticResource ListViewColumnHeaderStyle}"/>
-                    <GridViewColumn Header="Id" Width="50" DisplayMemberBinding="{Binding AirlineId}" HeaderContainerStyle="{StaticResource ListViewColumnHeaderStyle}"/>
+                    <GridViewColumn Header="Airliner" Width="100" DisplayMemberBinding="{Binding Airline}" HeaderContainerStyle="{StaticResource ListViewColumnHeaderStyle}"/>
+                    <GridViewColumn Header="Id" Width="100" DisplayMemberBinding="{Binding AirlineId}" HeaderContainerStyle="{StaticResource ListViewColumnHeaderStyle}"/>
                     <GridViewColumn Header="Destination" Width="150" DisplayMemberBinding="{Binding Destination}" HeaderContainerStyle="{StaticResource ListViewColumnHeaderStyle}"/>
-                    <GridViewColumn Header="Duration" Width="180" DisplayMemberBinding="{Binding Duration}" HeaderContainerStyle="{StaticResource ListViewColumnHeaderStyle}"/>
+                    <GridViewColumn Header="Duration" Width="120" DisplayMemberBinding="{Binding Duration}" HeaderContainerStyle="{StaticResource ListViewColumnHeaderStyle}"/>
                 </GridView>
             </ListView.View>
         </ListView>

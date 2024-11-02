@@ -58,11 +58,15 @@ namespace Control_Tower_System_PL
             TakeOff = new Command(FlightTakeOff, CanFlightTakeOff);
             ChangeAltitude = new Command(ChangeSelectedFlightAltitude, CanChangeSelectedFlightAltitude);
 
+            //Subscribes to the events in the bll layer
             _controlTower.FlightTakingOff += OnFlightTakingOff;
             _controlTower.FlightLanding += OnFlightLanding;
             _controlTower.FlightAltitudeChanged += OnFlightAltitudeChanged;
         }
 
+        /// <summary>
+        /// Updates the observablecollection 
+        /// </summary>
         public void UpdateCollection()
         {
             FlightList.Clear();
@@ -72,6 +76,10 @@ namespace Control_Tower_System_PL
             }
         }
 
+        /// <summary>
+        /// Checks if the user can change flight altitude
+        /// </summary>
+        /// <returns></returns>
         private bool CanChangeSelectedFlightAltitude()
         {
             if (CurrentSelectedFlightIndex >=0 && IsAltitudeCorrectFormat())
@@ -79,12 +87,20 @@ namespace Control_Tower_System_PL
             return false;
         }
 
+        /// <summary>
+        /// Changes the current selected flights altitude
+        /// </summary>
         private void ChangeSelectedFlightAltitude()
         {
             _controlTower.ChangeAltitude(CurrentSelectedFlightIndex, _newAltitude);
             ResetInput();
         }
 
+        /// <summary>
+        /// Checks if a flight can take off
+        /// If the list of flights is not empty and a flight is selected the flight can take off
+        /// </summary>
+        /// <returns></returns>
         private bool CanFlightTakeOff()
         {
             if (_currentSelectedFlightIndex>=0 && _flightList.Count > 0)
@@ -92,11 +108,19 @@ namespace Control_Tower_System_PL
             return false;
         }
 
+        /// <summary>
+        /// Orders the flight to take off
+        /// </summary>
         private void FlightTakeOff()
         {
             _controlTower.OrderTakeOff(CurrentSelectedFlightIndex);
         }
 
+        /// <summary>
+        /// Checks if the user can add a new flight
+        /// all input must be filled and the duration must be in correct format
+        /// </summary>
+        /// <returns></returns>
         private bool CanAddNewFlight()
         {
             if (_airline!=string.Empty && _airlineId != string.Empty &&
@@ -105,6 +129,11 @@ namespace Control_Tower_System_PL
             return false;
         }
 
+        /// <summary>
+        /// Adds a new flight
+        /// Resets the user input
+        /// Updates the observablecollection
+        /// </summary>
         private void AddNewFlight()
         {
             _controlTower.CreateFlight(AirlineId, Airline, Destination, _duration);
@@ -112,6 +141,9 @@ namespace Control_Tower_System_PL
             UpdateCollection();
         }
 
+        /// <summary>
+        /// Resets the user input after a flight as been added or altitude changed
+        /// </summary>
         private void ResetInput()
         {
             Destination = string.Empty;
@@ -121,21 +153,38 @@ namespace Control_Tower_System_PL
             ProposedAltitude = string.Empty;
         }
 
+        /// <summary>
+        /// Handles the event when the flight takes off
+        /// </summary>
+        /// <param name="e">The message added to the status list</param>
         private void OnFlightTakingOff(object sender, FlightTakeOffEventArgs e)
         {
             StatusList.Add(e.Message);
         }
 
+        /// <summary>
+        /// Handles the event when the flight lands
+        /// </summary>
+        /// <param name="e">The message added to the status list</param>
         private void OnFlightLanding(object sender, FlightLandedEventArgs e)
         {
             StatusList.Add(e.Message);
         }
 
+        /// <summary>
+        /// Handles the event when the flight changes altitude
+        /// </summary>
+        /// <param name="e">The message added to the status list</param>
         private void OnFlightAltitudeChanged(object sender, FlightHeightEventArgs e)
         {
             StatusList.Add(e.Message);
         }
 
+        /// <summary>
+        /// Checks if the altitude has a correct format
+        /// Uses the converterutils library
+        /// </summary>
+        /// <returns></returns>
         private bool IsAltitudeCorrectFormat()
         {
             if (ConverterUtils.StringToDouble(ProposedAltitude, out _newAltitude, 0, 10000))
@@ -143,6 +192,11 @@ namespace Control_Tower_System_PL
             return false;
         }
 
+        /// <summary>
+        /// Checks if the duration has a correct format
+        /// Uses the converterutils library
+        /// </summary>
+        /// <returns></returns>
         private bool IsDurationCorrectFormat()
         {
             if (ConverterUtils.StringToDouble(ProposedDuration, out _duration, 0, 100))
