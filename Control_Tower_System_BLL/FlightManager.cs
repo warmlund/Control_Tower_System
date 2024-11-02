@@ -11,11 +11,11 @@ namespace Control_Tower_System_BLL
     {
         private DispatcherTimer _dispatcher;
 
-        public event EventHandler<FlightTakeOffEventArgs> TakingOff;
-        public event EventHandler<FlightLandedEventArgs> Landing;
-        public event EventHandler<FlightHeightEventArgs> AltitudeChanging;
+        public event EventHandler<FlightTakeOffEventArgs> TakingOff; //Event triggers when the flight takes off
+        public event EventHandler<FlightLandedEventArgs> Landing; //Event triggers when the flight lands
+        public event EventHandler<FlightHeightEventArgs> AltitudeChanging; //Event triggers when the altitude changes
 
-        public Flight CurrentFlight {  get; private set; }
+        public Flight CurrentFlight {  get; private set; } //Holds the flight information
 
         public void CreateFlight(string id, string airline, string destination, double duration)
         {
@@ -31,6 +31,13 @@ namespace Control_Tower_System_BLL
             };
         }
 
+        /// <summary>
+        /// Initiates the take off of the flight
+        /// starts a timer simulating the flight duration
+        /// Sets the inflight to true
+        /// Sets local time to current time
+        /// Raises the takeoff event
+        /// </summary>
         public void OnTakeOff()
         {
             SetupTimer();
@@ -40,6 +47,13 @@ namespace Control_Tower_System_BLL
             TakingOff?.Invoke(CurrentFlight, new FlightTakeOffEventArgs(CurrentFlight));
         }
 
+        /// <summary>
+        /// Initiates landing of flight
+        /// stops the timer
+        /// Adds the duration of the flight to the flight's local time property
+        /// sets inflight to false
+        /// Raises the landing event
+        /// </summary>
         public void OnLanding()
         {
             _dispatcher.Stop();
@@ -48,21 +62,32 @@ namespace Control_Tower_System_BLL
             Landing?.Invoke(CurrentFlight, new FlightLandedEventArgs(CurrentFlight));
         }
 
+        /// <summary>
+        /// Initiate the altitude change of the flight
+        /// </summary>
+        /// <param name="altitude">the altitude variable from user input</param>
         public void OnAltitudeChange(double altitude)
         {
-            double oldAltitude = CurrentFlight.FlightAltitude;
-            CurrentFlight.FlightAltitude = altitude;
-            AltitudeChanging?.Invoke(CurrentFlight, new FlightHeightEventArgs(CurrentFlight, oldAltitude));
+            double oldAltitude = CurrentFlight.FlightAltitude; //Stores the old altitude
+            CurrentFlight.FlightAltitude = altitude; //Sets new altitude
+            AltitudeChanging?.Invoke(CurrentFlight, new FlightHeightEventArgs(CurrentFlight, oldAltitude)); //Invokes the event
         }
 
+        /// <summary>
+        /// Setups a timer for tracking the flight duration
+        /// </summary>
         private void SetupTimer()
         {
             _dispatcher= new DispatcherTimer();
-            _dispatcher.Tick += new EventHandler(OnTimerTicking);
+            _dispatcher.Tick += new EventHandler(OnTimerTicking); //assicoiate the tick event with the tick method
             _dispatcher.Interval = new TimeSpan(0, 0, 1);
            _dispatcher.Start();
         }
 
+        /// <summary>
+        /// Simulates one second as one hour
+        /// If the duration has been reached, the OnLanding method is called
+        /// </summary>
         public void OnTimerTicking(object? sender, EventArgs e)
         {
             TimeOnly currentTime= TimeOnly.FromDateTime(DateTime.Now);
@@ -74,6 +99,10 @@ namespace Control_Tower_System_BLL
             }      
         }
 
+        /// <summary>
+        /// Generates a random altitude height between 0 and 10 000
+        /// </summary>
+        /// <returns>a random double</returns>
         private double GenerateRandomHeight()
         {
             var random = new Random();
