@@ -3,10 +3,95 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Control_Tower_System"
+        xmlns:local="clr-namespace:Control_Tower_System" 
+        xmlns:control_tower_system_pl="clr-namespace:Control_Tower_System_PL" d:DataContext="{d:DesignInstance Type=control_tower_system_pl:ViewModel}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Control Tower System" Height="600" Width="800" Background="#F9F9F9" WindowStyle="ThreeDBorderWindow" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
 
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Getting styles from the resource dictionary-->
+                <ResourceDictionary Source="Styles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="300"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--#region Input And menu controls -->
+        <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0">
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Destination -->
+                <TextBlock Text="Destination" Style="{StaticResource ButtonTextStyle}" Margin="10" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox x:Name="DestinationTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding Destination}" Margin="10" Grid.Row="0" Grid.Column="1"/>
+
+                <!-- Airliner -->
+                <TextBlock Text="Airliner" Style="{StaticResource ButtonTextStyle}" Margin="10" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox x:Name="AirlineTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding Airline}" Margin="10" Grid.Row="1" Grid.Column="1"/>
+
+                <!-- Airline Id -->
+                <TextBlock Text="Airline Id" Style="{StaticResource ButtonTextStyle}" Margin="10" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox x:Name="AirlineIdTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding AirlineId}" Margin="10" Grid.Row="2" Grid.Column="1"/>
+
+                <!-- Flight Duration -->
+                <TextBlock Text="Flight Duration" Style="{StaticResource ButtonTextStyle}" Margin="10" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center"/>
+                <TextBox x:Name="DurationTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding ProposedDuration}" Margin="10" Grid.Row="3" Grid.Column="1"/>
+
+                <!--Add Flight Button-->
+                <Button x:Name="AddFlightButton" Content="Add Flight" Style="{StaticResource MenuButtonStyle}" Command="{Binding AddFlight}" Margin="10" Grid.Column="1" Grid.Row="4"/>
+
+                <!--Add Flight Button-->
+                <Button x:Name="TakeOffButton" Content="Take Off" Style="{StaticResource MenuButtonStyle}" Command="{Binding TakeOff}" Margin="10" Grid.Column="1" Grid.Row="5"/>
+
+                <!--New Altitude Button-->
+                <Button x:Name="SetNewAltitudeButton" Content="Set New Altitude" Style="{StaticResource MenuButtonStyle}" Command="{Binding ChangeAltitude}" Margin="10" Grid.Column="0" Grid.Row="6"/>
+                <TextBox x:Name="AltitudeTextBox" Style="{StaticResource TextBoxStyle}" Text="{Binding ProposedAltitude}" Margin="10" Grid.Row="6" Grid.Column="1"/>
+            </Grid>
+        </StackPanel>
+        <!--#endregion-->
+
+        <ListView x:Name="FlightInformation" Grid.Row="0" Grid.Column="1" ItemsSource="{Binding FlightList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  Style="{StaticResource ListViewStyle}" ItemContainerStyle="{StaticResource ListViewItemStyle}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Airliner" Width="120" DisplayMemberBinding="{Binding Name}" HeaderContainerStyle="{StaticResource ListViewColumnHeaderStyle}"/>
+                    <GridViewColumn Header="Id" Width="50" DisplayMemberBinding="{Binding Id}" HeaderContainerStyle="{StaticResource ListViewColumnHeaderStyle}"/>
+                    <GridViewColumn Header="Destination" Width="150" DisplayMemberBinding="{Binding Destination}" HeaderContainerStyle="{StaticResource ListViewColumnHeaderStyle}"/>
+                    <GridViewColumn Header="Duration" Width="180" DisplayMemberBinding="{Binding Duration}" HeaderContainerStyle="{StaticResource ListViewColumnHeaderStyle}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <ListView x:Name="FlightStatus" Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding StatusList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+           Style="{StaticResource ListViewStyle}" ItemContainerStyle="{StaticResource ListViewItemStyle}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Flight Status" Width="800" HeaderContainerStyle="{StaticResource ListViewColumnHeaderStyle}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
 </Window>
