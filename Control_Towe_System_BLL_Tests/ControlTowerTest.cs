@@ -13,7 +13,6 @@ namespace Control_Towe_System_BLL_Tests
         private const int testFlightIndex = 0;
         private ControlTower controlTower;
 
-
         [TestMethod]
         public void ChangeAltitudeTest()
         {

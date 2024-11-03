@@ -43,7 +43,6 @@ namespace Control_Tower_System_BLL
             SetupTimer();
             CurrentFlight.InFlight = true;
             CurrentFlight.LocalTime=TimeOnly.FromDateTime(DateTime.Now);
-
             TakingOff?.Invoke(CurrentFlight, new FlightTakeOffEventArgs(CurrentFlight));
         }
 
