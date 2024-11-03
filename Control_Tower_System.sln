@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Control_Tower_System_DTO", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Control_Tower_System_DAL", "Control_Tower_System_DAL\Control_Tower_System_DAL.csproj", "{EBE1ADDD-F0CC-41AD-BDD9-0886B6D245BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Control_Towe_System_BLL_Tests", "Control_Towe_System_BLL_Tests\Control_Towe_System_BLL_Tests.csproj", "{41B919DC-026C-4D5F-9918-A5FD344F9B06}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Control_Tower_System_BLL_Tests", "Control_Towe_System_BLL_Tests\Control_Tower_System_BLL_Tests.csproj", "{41B919DC-026C-4D5F-9918-A5FD344F9B06}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

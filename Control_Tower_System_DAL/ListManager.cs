@@ -12,7 +12,6 @@
 
         public void Add(T item)
         {
-
             _list.Add(item);
         }
 
