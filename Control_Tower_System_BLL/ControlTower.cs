@@ -9,6 +9,7 @@ namespace Control_Tower_System_BLL
     public class ControlTower
     {
         private FlightStorage _flightStorage; //Stores all the flights
+        public FlightStorage FStorage { get { return _flightStorage; } }
 
         public delegate void ChangeAltitudeDelegate(double altitudeValue); // Delegate for changing the altitude of a specific flight
 
