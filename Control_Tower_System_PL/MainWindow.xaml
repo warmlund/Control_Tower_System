@@ -81,7 +81,7 @@
                 <Button x:Name="SetNewAltitudeButton" Content="Set New Altitude" Style="{StaticResource MenuButtonStyle}" Command="{Binding ChangeAltitude}" Margin="10" Grid.Column="0" Grid.Row="6"/>
                 <TextBox x:Name="AltitudeTextBox" Style="{StaticResource TextBoxDoubleStyle}" Margin="10" Grid.Row="6" Grid.Column="1">
                     <TextBox.Text>
-                        <Binding Path="ProposedDuration" UpdateSourceTrigger="PropertyChanged">
+                        <Binding Path="ProposedAltitude" UpdateSourceTrigger="PropertyChanged">
                             <Binding.ValidationRules>
                                 <StaticResource ResourceKey="DoubleValidationRule"/>
                             </Binding.ValidationRules>

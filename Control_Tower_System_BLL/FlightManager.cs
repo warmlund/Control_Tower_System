@@ -78,24 +78,19 @@ namespace Control_Tower_System_BLL
         private void SetupTimer()
         {
             _dispatcher= new DispatcherTimer();
-            _dispatcher.Tick += new EventHandler(OnTimerTicking); //assicoiate the tick event with the tick method
+            _dispatcher.Tick += (s, e) =>
+            {
+                TimeOnly currentTime = TimeOnly.FromDateTime(DateTime.Now);
+                double timeLeft = (currentTime - CurrentFlight.LocalTime).TotalSeconds;
+
+                if (timeLeft >= CurrentFlight.Duration)
+                {
+                    OnLanding();
+                }
+            };
+           /* _dispatcher.Tick += new EventHandler(OnTimerTicking); *///assicoiate the tick event with the tick method
             _dispatcher.Interval = new TimeSpan(0, 0, 1);
            _dispatcher.Start();
-        }
-
-        /// <summary>
-        /// Simulates one second as one hour
-        /// If the duration has been reached, the OnLanding method is called
-        /// </summary>
-        public void OnTimerTicking(object? sender, EventArgs e)
-        {
-            TimeOnly currentTime= TimeOnly.FromDateTime(DateTime.Now);
-            double timeLeft=(currentTime-CurrentFlight.LocalTime).TotalSeconds;
-
-            if(timeLeft >= CurrentFlight.Duration)
-            {
-                OnLanding();
-            }      
         }
 
         /// <summary>
