@@ -1,10 +1,5 @@
 ﻿using Control_Tower_System_BLL;
 using Control_Tower_System_DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Control_Tower_System_BLL_Tests
 {
@@ -24,9 +19,9 @@ namespace Control_Tower_System_BLL_Tests
         public void GetAllFlightsTest()
         {
             //Arrangements made in setup
-            
+
             //Act
-            List<Flight> flights= controlTower.FStorage.GetAllFlights();
+            List<Flight> flights = controlTower.FStorage.GetAllFlights();
 
             //Assert
             Assert.IsTrue(flights.Count > 0, "Flight list is empty");
@@ -37,7 +32,7 @@ namespace Control_Tower_System_BLL_Tests
         {
             //Arrange
             int flightIndex = 0;
-            int flightCount=controlTower.FStorage.Count;
+            int flightCount = controlTower.FStorage.Count;
 
             //Act
             controlTower.FStorage.RemoveAt(0);

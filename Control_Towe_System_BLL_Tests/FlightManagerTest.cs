@@ -27,7 +27,7 @@ namespace Control_Tower_System_BLL_Tests
             bool isEventTriggered = false; //Sets bool for tracking event trigger to false
             FlightTakeOffEventArgs takeOffEventArgs = null; //sets FlightTakeOffEventArgs variable to null
 
-            flightManager.TakingOff += (s, e) =>  // Attach an event handler
+            flightManager.TakingOff += (s, e) =>  // Subscribe to event
             {
                 isEventTriggered = true; //if the event is invoked in the test method, this will set to true
                 takeOffEventArgs = e; //if the event is invoked in the test method, the eventargs variable will be set to the eventarg in the eventhandler
@@ -47,7 +47,7 @@ namespace Control_Tower_System_BLL_Tests
             bool isEventTriggered = false;  // Attach an event handler to the FlightAltitudeChanged event
             FlightLandedEventArgs landingEventArgs = null; //Sets FlightLandingEventArgs to null
 
-            flightManager.Landing += (s, e) => //Attach event handler
+            flightManager.Landing += (s, e) => //Subscribe to event
             {
                 isEventTriggered = true; //if the event is invoked in the test method, this will set to true
                 landingEventArgs = e; //if the event is invoked in the test method, the eventargs variable will be set to the eventarg in the eventhandler
