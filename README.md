@@ -30,7 +30,7 @@
 
 
 ## Screenshots
-
+![](img/project_screenshot.png)
 <!-- If you have screenshots you'd like to share, include them here. -->
 
 ## Contact
