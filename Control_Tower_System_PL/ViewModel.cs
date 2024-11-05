@@ -82,7 +82,7 @@ namespace Control_Tower_System_PL
         /// <returns></returns>
         private bool CanChangeSelectedFlightAltitude()
         {
-            if (CurrentSelectedFlightIndex >=0 && IsAltitudeCorrectFormat())
+            if (CurrentSelectedFlightIndex >=0 && IsAltitudeCorrectFormat() && _controlTower.FStorage.GetFlight(_currentSelectedFlightIndex).InFlight == true)
                 return true;
             return false;
         }
@@ -103,7 +103,7 @@ namespace Control_Tower_System_PL
         /// <returns></returns>
         private bool CanFlightTakeOff()
         {
-            if (_currentSelectedFlightIndex>=0 && _flightList.Count > 0)
+            if (_currentSelectedFlightIndex>=0 && _flightList.Count > 0 && _controlTower.FStorage.GetFlight(_currentSelectedFlightIndex).InFlight!=true)
                 return true;
             return false;
         }
@@ -114,6 +114,8 @@ namespace Control_Tower_System_PL
         private void FlightTakeOff()
         {
             _controlTower.OrderTakeOff(CurrentSelectedFlightIndex);
+            TakeOff.RaiseCanExecuteChanged();
+            ChangeAltitude.RaiseCanExecuteChanged();
         }
 
         /// <summary>
