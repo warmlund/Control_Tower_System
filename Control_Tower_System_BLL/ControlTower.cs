@@ -34,7 +34,7 @@ namespace Control_Tower_System_BLL
         /// <param name="duration">flight duration</param>
         public void CreateFlight(string id, string airline, string destination, double duration)
         {
-            var flightManager = new FlightManager();
+            FlightManager flightManager = new FlightManager();
             flightManager.CreateFlight(id, airline, destination, duration);
 
             //Subscribes to the managers events
@@ -53,7 +53,7 @@ namespace Control_Tower_System_BLL
         /// <param name="altitude">the user input altitude</param>
         public void ChangeAltitude(int flightId, double altitude)
         {
-            var flightManager = _flightStorage.Get(flightId);
+            FlightManager flightManager = _flightStorage.Get(flightId);
 
             // Define the delegate to encapsulate the OnAltitudeChange method
             ChangeAltitudeDelegate changeAltitudeDelegate = flightManager.OnAltitudeChange;
@@ -68,7 +68,7 @@ namespace Control_Tower_System_BLL
         /// <param name="flightId">the flight index in the storage</param>
         public void OrderTakeOff(int flightId)
         {
-            var flightManager = _flightStorage.Get(flightId);
+            FlightManager flightManager = _flightStorage.Get(flightId);
             flightManager?.OnTakeOff();
         }
 

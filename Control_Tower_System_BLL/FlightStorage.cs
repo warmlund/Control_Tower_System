@@ -7,8 +7,8 @@ namespace Control_Tower_System_BLL
     {
         public List<FlightManager> GetAllFlightsManagers()
         {
-            var list = new List<FlightManager>();
-            foreach (var flight in _list)
+            List<FlightManager> list = new List<FlightManager>();
+            foreach (FlightManager flight in _list)
             {
                 list.Add(flight);
             }
@@ -17,8 +17,8 @@ namespace Control_Tower_System_BLL
 
         public List<Flight> GetAllFlights()
         {
-            var list = new List<Flight>();
-            foreach(var flight in _list)
+            List<Flight> list = new List<Flight>();
+            foreach(FlightManager flight in _list)
             {
                 list.Add(flight.CurrentFlight);
             }
