@@ -99,7 +99,7 @@ namespace Control_Tower_System_BLL
         /// <returns>a random double</returns>
         private double GenerateRandomHeight()
         {
-            var random = new Random();
+            Random random = new Random();
             return random.Next(0, 10000);
         }
     }

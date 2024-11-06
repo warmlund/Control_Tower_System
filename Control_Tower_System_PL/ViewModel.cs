@@ -70,7 +70,7 @@ namespace Control_Tower_System_PL
         public void UpdateCollection()
         {
             FlightList.Clear();
-            foreach (var flight in _controlTower.GetAllFlights())
+            foreach (Flight flight in _controlTower.GetAllFlights())
             {
                 FlightList.Add(flight);
             }
